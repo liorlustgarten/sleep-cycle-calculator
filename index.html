@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html land="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Mitch's Sleep Cycle Calculator</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+        <script defer src="index.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div class=input-div>
+            Hours until falling sleep:<input type="text" id="until-sleep" value="11">
+        </div>
+        <div class=input-div>
+            Hours of sleep per night:<input type="text" id="hours-asleep" value="11">
+        </div>
+        <div class=input-div>
+            Hours awake per day:<input type="text" id="hours-awake" value="35">
+        </div>
+        <button class="blue button" id="get-schedule">Calculate Schedule!</button>
+        <div id="schedule-text">
+            Click the button to generate a schedule.
+        </div>
+    </body>
+</html>
