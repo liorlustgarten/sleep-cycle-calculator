@@ -10,18 +10,25 @@
         <script defer src="index.js" charset="utf-8"></script>
     </head>
     <body>
-        <div class=input-div>
-            Hours until falling sleep:<input type="text" id="until-sleep" value="11">
-        </div>
-        <div class=input-div>
-            Hours of sleep per night:<input type="text" id="hours-asleep" value="11">
-        </div>
-        <div class=input-div>
-            Hours awake per day:<input type="text" id="hours-awake" value="35">
-        </div>
-        <button class="blue button" id="get-schedule">Calculate Schedule!</button>
-        <div id="schedule-text">
-            Click the button to generate a schedule.
+        <div class=main-pane>
+            <div style="text-align: center">
+                <h2>Imperial Mitch Sleep Cycle Calculator</h2>
+            </div>
+            <div class=input-div>
+                Hours until falling sleep:<input type="text" id="until-sleep" value="">
+            </div>
+            <div class=input-div>
+                Hours of sleep per night:<input type="text" id="hours-asleep" value="">
+            </div>
+            <div class=input-div>
+                Hours awake per day:<input type="text" id="hours-awake" value="">
+            </div>
+            <div class=button-div>
+            <button class="blue button" id="get-schedule">Calculate Schedule!</button>
+            </div>
+            <div id="schedule-text">
+                Click the button to generate a schedule.
+            </div>
         </div>
     </body>
 </html>

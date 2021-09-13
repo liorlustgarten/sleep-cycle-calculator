@@ -1,5 +1,6 @@
 let scheduleDiv = document.getElementById('schedule-text')
 let scheduleButton = document.getElementById('get-schedule')
+let scheduleTextID = 'sleep_schedule_id'
 
 Date.prototype.addHours = function(h) {
     this.setTime(this.getTime() + (h*60*60*1000));
@@ -26,7 +27,7 @@ scheduleButton.addEventListener("click", evt => {
         var dateTime = new Date();
         htmlString = `<div class="current-time">It is currently ` + formatDate(dateTime) + `</div>`
         dateTime.addHours(untilSleep)
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 10; i++) {
             let sleepStart = formatDate(dateTime)
             dateTime.addHours(sleepHours)
             let sleepEnd = formatDate(dateTime)
@@ -36,5 +37,11 @@ scheduleButton.addEventListener("click", evt => {
             dateTime.addHours(awakeHours)
         }
         scheduleDiv.innerHTML = htmlString
+
+        window.localStorage.setItem(scheduleTextID, htmlString);
     }
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    scheduleDiv.innerHTML = window.localStorage.getItem(scheduleTextID);
+}, false);

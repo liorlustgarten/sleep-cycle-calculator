@@ -1,7 +1,7 @@
 html {
     height: 100vh;
     min-width: 600px;
-    background-image: linear-gradient(130deg, #FFFFFF,#1C3F80);
+    background-image: linear-gradient(130deg, #000000,#0b244d);
     background-repeat: no-repeat;
     background-size: auto;
     font-family: 'Roboto', sans-serif;
@@ -16,25 +16,42 @@ input[type="text"] {
     height: 30px;
     outline: 0;
     border: none;
-    font-size: 1rem;
+    font-size: 2rem;
     font-family: 'Roboto', sans-serif;
     color: #595959;
     flex-grow: 1;
+    margin: 5px;
 }
 
+.main-pane{
+  margin: auto;
+  padding: 20px;
+  border-width: 3px;
+  border-color:rgba(0, 0, 0, .5);
+  border-style: solid;
+  border-radius: 10px;
+  width: 40%;
+  background-color: #fdc651;
+}
+
+
 .input-div{
-    margin-top:5px;
+    margin: auto;
+
 }
 
 .sleep-title{
     margin-top:7px;
+    font-weight: bold;
 }
 
 .current-time{
     margin-top:7px;
 }
 
-
+.button-div{
+  text-align:center
+}
 /*ALL button stuff below here*/
 
 .button::-moz-focus-inner{
@@ -47,7 +64,8 @@ input[type="text"] {
   *display: inline;
   zoom: 1;
   padding: 6px 20px;
-  margin: 0;
+  width: 50%;
+  margin: auto;
   cursor: pointer;
   border: 1px solid #bbb;
   overflow: visible;
