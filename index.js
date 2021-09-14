@@ -1,6 +1,8 @@
 let scheduleDiv = document.getElementById('schedule-text')
 let scheduleButton = document.getElementById('get-schedule')
 let scheduleTextID = 'sleep_schedule_id'
+let hoursAsleepID = 'hours_asleep_id'
+let hoursAwakeID = 'hours_awake_id'
 
 Date.prototype.addHours = function(h) {
     this.setTime(this.getTime() + (h*60*60*1000));
@@ -38,10 +40,14 @@ scheduleButton.addEventListener("click", evt => {
         }
         scheduleDiv.innerHTML = htmlString
 
-        window.localStorage.setItem(scheduleTextID, htmlString);
+        window.localStorage.setItem(scheduleTextID, htmlString)
+        window.localStorage.setItem(hoursAsleepID, sleepHoursInput)
+        window.localStorage.setItem(hoursAwakeID, awakeHoursInput)
     }
 })
 
 document.addEventListener('DOMContentLoaded', function() {
-    scheduleDiv.innerHTML = window.localStorage.getItem(scheduleTextID);
+    scheduleDiv.innerHTML = window.localStorage.getItem(scheduleTextID)
+    document.getElementById('hours-asleep').value = window.localStorage.getItem(hoursAsleepID)
+    document.getElementById('hours-awake').value = window.localStorage.getItem(hoursAwakeID)
 }, false);
