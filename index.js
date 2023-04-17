@@ -9,6 +9,45 @@ Date.prototype.addHours = function(h) {
     return this;
 }
 
+function isDateRangeConflict(range1Start, range1End, range2Start, range2End){
+    if (range1Start < range2End && range2Start < range1End) {
+        return true
+    }
+    return false
+}
+
+function getNextLawnmowing(startTime){
+    var dateTime = new Date(startTime.valueOf())
+
+    var hours = dateTime.getHours();
+    var mins = dateTime.getMinutes();
+    var day = dateTime.getDay();
+    var secs = dateTime.getSeconds();
+
+    //temporarily hardcoding to monday 8am to 10am
+    var monday = 1;
+    var lawnmowingStartHour = 8;
+    var lawnmowingEndHour = 10;
+    if(day == monday){
+        if(hours >= lawnmowingEndHour)
+            dateTime.addHours(24)
+    }
+
+    var daysTillMonday = (monday - dateTime.getDay() + 7)%7;
+    var hoursTilMow = daysTillMonday * 24 - hours - (mins / 60) - (secs / 60 /60)
+
+    dateTime.addHours(lawnmowingStartHour + hoursTilMow)
+
+    return dateTime
+}
+
+function isLawnmowerDuringSleep(sleepStart, sleepEnd){
+    lawnmowerStart = getNextLawnmowing(sleepStart)
+    lawnmowerEnd = new Date(lawnmowerStart.valueOf())
+    lawnmowerEnd.addHours(2)
+    return isDateRangeConflict(sleepStart, sleepEnd, lawnmowerStart, lawnmowerEnd)
+}
+
 function formatDate(date){
     const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true }
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
@@ -30,12 +69,16 @@ scheduleButton.addEventListener("click", evt => {
         htmlString = `<div class="current-time">It is currently ` + formatDate(dateTime) + `</div>`
         dateTime.addHours(untilSleep)
         for (let i = 1; i < 10; i++) {
-            let sleepStart = formatDate(dateTime)
+            let sleepStart = new Date(dateTime.valueOf())
             dateTime.addHours(sleepHours)
-            let sleepEnd = formatDate(dateTime)
+            let sleepEnd = new Date(dateTime.valueOf())
+            lawnmowingDateTime = getNextLawnmowing(sleepStart)
             htmlString += `<div class="sleep-title"> Sleep ` + i + `</div>` + 
-            `<div class="sleep-start"> Fall asleep at `+ sleepStart + `</div>` +
-            `<div class="sleep-end"> Wake up at ` + sleepEnd + `</div>`
+            `<div class="sleep-start"> Fall asleep at `+ formatDate(sleepStart) + `</div>` +
+            `<div class="sleep-end"> Wake up at ` + formatDate(sleepEnd) + `</div>`
+            if(isLawnmowerDuringSleep(sleepStart, sleepEnd)){
+                htmlString += `<div class="lawnmower-warning"> EARPLUG WARNING! This sleep may conflict with lawnmowing at `+formatDate(lawnmowingDateTime)+`</div>`
+            }
             dateTime.addHours(awakeHours)
         }
         scheduleDiv.innerHTML = htmlString

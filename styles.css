@@ -54,6 +54,11 @@ input[type="text"] {
     font-weight: bold;
 }
 
+.lawnmower-warning{
+  font-weight: bold;
+  color: #970000;
+}
+
 .current-time{
     margin-top:7px;
 }
